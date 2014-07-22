@@ -36,7 +36,7 @@ def _submit_job( job_submitter, command, job_parms, waitfor_id=None, hold=False,
             args += " -h"
         if notify:
             args += " -m e"
-        submit_command = "qsub -e \'%s\' -w \'%s\' -l ncpus=%s,mem=%sgb,walltime=%s:00:00 -m a -N \'%s\' %s %s %s" % (job_parms["work_dir"], job_parms["work_dir"], job_parms['num_cpus'], job_parms['mem_requested'], job_parms['walltime'], job_parms['name'], waitfor, queue, args)
+        submit_command = "qsub -e \'%s\' -W \'%s\' -l ncpus=%s,mem=%sgb,walltime=%s:00:00 -m a -N \'%s\' %s %s %s" % (job_parms["work_dir"], job_parms["work_dir"], job_parms['num_cpus'], job_parms['mem_requested'], job_parms['walltime'], job_parms['name'], waitfor, queue, args)
         logging.debug("submit_command = %s", submit_command)
         output = subprocess.getoutput("echo \"%s\" | %s - " % (command, submit_command))
         logging.debug("output = %s", output)
